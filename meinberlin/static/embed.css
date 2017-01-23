@@ -1,0 +1,25 @@
+html.embed {
+    margin: 0;
+    padding: 0;
+    background: white;
+}
+html.embed body {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+}
+
+.page,
+.popup {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.page {
+    right: 50%;
+}
+.popup {
+    left: 50%;
+}

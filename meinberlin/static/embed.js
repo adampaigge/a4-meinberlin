@@ -2,6 +2,7 @@ $(document).ready(function() {
   var $page = $('.page');
   var $popup = $('.popup');
   var state = {};
+  window.a4state = state;
 
   var clickHandler;
 

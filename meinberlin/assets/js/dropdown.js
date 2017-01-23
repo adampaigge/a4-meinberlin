@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
-$(document).ready(function() {
-  $('.dropdown').each(function(index, el) {
+module.exports = function($wrapper) {
+  $wrapper.find('.dropdown').each(function(index, el) {
       var $el = $(el);
       var $toggle = $el.find('.dropdown-toggle');
       var $menu = $el.find('.dropdown-menu');
@@ -40,4 +40,4 @@ $(document).ready(function() {
 
       setShow(false);
   });
-});
+};

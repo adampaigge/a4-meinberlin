@@ -38,7 +38,7 @@ $(document).ready(function() {
   }
 
   var clickHandler = function(event) {
-    if (event.target.href) {
+    if (event.target.href && !event.target.target) {
       event.preventDefault();
       var target = event.target.dataset.embedTarget;
       if (target === 'popup') {

@@ -27,9 +27,9 @@ $(document).ready(function() {
 
     return Promise.all(promises).then(function() {
       if (newState.popup) {
-        $popup.hide();
-      } else {
         $popup.show();
+      } else {
+        $popup.hide();
       }
     });
   }
@@ -37,9 +37,17 @@ $(document).ready(function() {
   var clickHandler = function(event) {
     if (event.target.href) {
       event.preventDefault();
-      setState({
-        url: event.target.href
-      });
+      var target = event.target.dataset.embedTarget;
+      if (target === 'page' || (!target && !state.popup)) {
+        setState({
+          url: event.target.href,
+        });
+      } else {
+        setState({
+          url: state.url,
+          popup: event.target.href,
+        });
+      }
     }
   };
 

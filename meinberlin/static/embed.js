@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var $page = $('.embed-page');
-  var $popup = $('.embed-popup');
+  var $modal = $('.embed-modal');
   var state = {};
   window.a4state = state;
 
@@ -21,17 +21,17 @@ $(document).ready(function() {
     if (state.url !== newState.url) {
       promises.push(load(newState.url, $page));
     }
-    if (state.popup !== newState.popup && newState.popup) {
-      promises.push(load(newState.popup, $popup));
+    if (state.modal !== newState.modal && newState.modal) {
+      promises.push(load(newState.modal, $modal));
     }
 
     return Promise.all(promises).then(function() {
       state.url = newState.url;
-      state.popup = newState.popup;
-      if (state.popup) {
-        $popup.show();
+      state.modal = newState.modal;
+      if (state.modal) {
+        $modal.show();
       } else {
-        $popup.hide();
+        $modal.hide();
       }
     });
   }
@@ -40,21 +40,21 @@ $(document).ready(function() {
     if (event.target.href) {
       event.preventDefault();
       var target = event.target.dataset.embedTarget;
-      if (target === 'page' || (!target && !state.popup)) {
+      if (target === 'page' || (!target && !state.modal)) {
         setState({
           url: event.target.href,
         });
       } else {
         setState({
           url: state.url,
-          popup: event.target.href,
+          modal: event.target.href,
         });
       }
     }
   };
 
   $page.on('click', clickHandler);
-  $popup.on('click', clickHandler);
+  $modal.on('click', clickHandler);
   setState({
     url: 'http://localhost:8000/projects/project1/'
   });

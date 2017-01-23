@@ -20,7 +20,7 @@ html.embed body {
 }
 
 .embed-page,
-.embed-popup {
+.embed-modal {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -30,6 +30,6 @@ html.embed body {
 .embed-page {
     right: 50%;
 }
-.embed-popup {
+.embed-modal {
     left: 50%;
 }

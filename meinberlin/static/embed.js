@@ -20,12 +20,14 @@ $(document).ready(function() {
     if (state.url !== newState.url) {
       promises.push(load(newState.url, $page));
     }
-    if (state.popup !== newState.popup) {
+    if (state.popup !== newState.popup && newState.popup) {
       promises.push(load(newState.popup, $popup));
     }
 
     return Promise.all(promises).then(function() {
-      if (newState.popup) {
+      state.url = newState.url;
+      state.popup = newState.popup;
+      if (state.popup) {
         $popup.show();
       } else {
         $popup.hide();

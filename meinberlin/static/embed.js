@@ -11,6 +11,7 @@ $(document).ready(function() {
       $target.empty();
       $target.append($main.children());
       $target.on('click', clickHandler);
+      adhocracy4.onReady($target);
     });
   };
 

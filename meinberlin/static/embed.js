@@ -10,7 +10,6 @@ $(document).ready(function() {
       var $main = $(html).filter('main');
       $target.empty();
       $target.append($main.children());
-      $target.on('click', clickHandler);
       adhocracy4.onReady($target);
     });
   };
@@ -51,6 +50,8 @@ $(document).ready(function() {
     }
   };
 
+  $page.on('click', clickHandler);
+  $popup.on('click', clickHandler);
   setState({
     url: 'http://localhost:8000/projects/project1/'
   });

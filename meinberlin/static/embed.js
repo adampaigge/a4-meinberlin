@@ -16,7 +16,7 @@ $(document).ready(function() {
     });
   };
 
-  var setState = function(newState) {
+  var setState = function(newState, ignoreHistory) {
     var promises = [];
 
     if (state.url !== newState.url) {
@@ -29,6 +29,9 @@ $(document).ready(function() {
     return Promise.all(promises).then(function() {
       state.url = newState.url;
       state.modal = newState.modal;
+      if (!ignoreHistory) {
+        history.pushState(newState, '');
+      }
       if (state.modal) {
         $modal.show();
       } else {
@@ -63,6 +66,10 @@ $(document).ready(function() {
       popup = null;
       location.reload();
     }
+  });
+
+  window.addEventListener('popstate', function(event) {
+    setState(event.state, true);
   });
 
   if (window.opener) {

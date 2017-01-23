@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  var $page = $('.page');
-  var $popup = $('.popup');
+  var $page = $('.embed-page');
+  var $popup = $('.embed-popup');
   var state = {};
   window.a4state = state;
 

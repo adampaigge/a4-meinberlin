@@ -2,6 +2,7 @@ $(document).ready(function() {
   var $page = $('.embed-page');
   var $modal = $('.embed-modal');
   var state = {};
+  var popup;
   window.a4state = state;
 
   var clickHandler;
@@ -40,7 +41,9 @@ $(document).ready(function() {
     if (event.target.href) {
       event.preventDefault();
       var target = event.target.dataset.embedTarget;
-      if (target === 'page' || (!target && !state.modal)) {
+      if (target === 'popup') {
+        popup = window.open(event.target.href, "_blank", "width=1000,height=750");
+      } else if (target === 'page' || (!target && !state.modal)) {
         setState({
           url: event.target.href,
         });
@@ -53,9 +56,23 @@ $(document).ready(function() {
     }
   };
 
-  $page.on('click', clickHandler);
-  $modal.on('click', clickHandler);
-  setState({
-    url: 'http://localhost:8000/projects/project1/'
+  window.addEventListener('message', function(event) {
+    var message = JSON.parse(event.data);
+    if (message.name === "popup-close" && event.origin === location.origin) {
+      popup.close();
+      popup = null;
+      location.reload();
+    }
   });
+
+  if (window.opener) {
+    window.opener.postMessage(JSON.stringify({
+      name: "popup-close",
+    }), location.origin);
+  } else {
+    $(document).on('click', clickHandler);
+    setState({
+      url: 'http://localhost:8000/projects/project1/'
+    });
+  }
 });

@@ -8,6 +8,6 @@
         <button type="submit" class="button--as-link">{% trans "logout" %}</button>
     </form>
 {% else %}
-    <a href="{% url 'account_login' %}?next={{ redirect_field_value }}">{% trans "login" %}</a>
-    <a href="{% url 'account_signup' %}?next={{ redirect_field_value }}">{% trans "register" %}</a>
+    <a href="{% url 'account_login' %}?next={{ redirect_field_value }}" data-embed-target="popup">{% trans "login" %}</a>
+    <a href="{% url 'account_signup' %}?next={{ redirect_field_value }}" data-embed-target="external">{% trans "register" %}</a>
 {% endif %}

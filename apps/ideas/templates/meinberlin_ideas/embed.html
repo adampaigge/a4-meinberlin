@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static %}
+{% load static userindicator %}
 <html class="embed">
 <head>
     <meta charset="utf-8" />
@@ -18,7 +18,7 @@
 
 <body>
     <header class="embed-header">
-        <a>Login</a>
+        {% userindicator %}
     </header>
     <main class="embed-main">
         <div class="page"></div>

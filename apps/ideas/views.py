@@ -75,3 +75,7 @@ class IdeaDeleteView(PermissionRequiredMixin, generic.DeleteView):
     def get_success_url(self):
         return reverse(
             'project-detail', kwargs={'slug': self.object.project.slug})
+
+
+class EmbedView(generic.base.TemplateView):
+    template_name = "meinberlin_ideas/embed.html"

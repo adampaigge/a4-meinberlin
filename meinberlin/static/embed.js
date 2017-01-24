@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var $page = $('.embed-page');
   var $modal = $('.embed-modal');
+  var $platformLink = $('.platform-link');
   var state = {};
   var popup;
   window.a4state = state;
@@ -68,6 +69,7 @@ $(document).ready(function() {
       if (!ignoreHistory) {
         history.pushState(newState, '');
       }
+      $platformLink.attr('href', state.modal || state.url);
       setHidden($modal, !state.modal);
     });
   }

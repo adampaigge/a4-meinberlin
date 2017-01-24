@@ -7,12 +7,29 @@ $(document).ready(function() {
 
   var clickHandler;
 
-  var load = function(url, $target) {
-    return $.ajax(url).then(function(html) {
+  var onReady = function($target) {
+    adhocracy4.onReady($target);
+
+    $target.find('form[action]').submit(function(event) {
+      event.preventDefault();
+      var form = this;
+
+      setTimeout(function() {
+        load($.ajax({
+          url: form.action,
+          method: form.method,
+          data: $(form).serialize(),
+        }), $target);
+      });
+    });
+  };
+
+  var load = function(promise, $target) {
+    return promise.then(function(html) {
       var $main = $(html).filter('main');
       $target.empty();
       $target.append($main.children());
-      adhocracy4.onReady($target);
+      onReady($target);
     });
   };
 
@@ -35,10 +52,10 @@ $(document).ready(function() {
     var promises = [];
 
     if (state.url !== newState.url) {
-      promises.push(load(newState.url, $page));
+      promises.push(load($.ajax(newState.url), $page));
     }
     if (state.modal !== newState.modal && newState.modal) {
-      promises.push(load(newState.modal, $modal));
+      promises.push(load($.ajax(newState.modal), $modal));
     }
 
     return Promise.all(promises).then(function() {

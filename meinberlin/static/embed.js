@@ -5,8 +5,6 @@ $(document).ready(function() {
   var popup;
   window.a4state = state;
 
-  var clickHandler;
-
   var onReady = function($target) {
     adhocracy4.onReady($target);
 
@@ -15,7 +13,7 @@ $(document).ready(function() {
       var form = this;
 
       setTimeout(function() {
-        load($.ajax({
+        loadHtml($.ajax({
           url: form.action,
           method: form.method,
           data: $(form).serialize(),
@@ -24,7 +22,7 @@ $(document).ready(function() {
     });
   };
 
-  var load = function(promise, $target) {
+  var loadHtml = function(promise, $target) {
     return promise.then(function(html) {
       var $main = $(html).filter('main');
       $target.empty();
@@ -52,10 +50,10 @@ $(document).ready(function() {
     var promises = [];
 
     if (state.url !== newState.url) {
-      promises.push(load($.ajax(newState.url), $page));
+      promises.push(loadHtml($.ajax(newState.url), $page));
     }
     if (state.modal !== newState.modal && newState.modal) {
-      promises.push(load($.ajax(newState.modal), $modal));
+      promises.push(loadHtml($.ajax(newState.modal), $modal));
     }
 
     return Promise.all(promises).then(function() {
@@ -87,6 +85,10 @@ $(document).ready(function() {
     }
   };
 
+  window.addEventListener('popstate', function(event) {
+    setState(event.state, true);
+  });
+
   window.addEventListener('message', function(event) {
     var message = JSON.parse(event.data);
     if (message.name === "popup-close" && event.origin === location.origin) {
@@ -94,10 +96,6 @@ $(document).ready(function() {
       popup = null;
       location.reload();
     }
-  });
-
-  window.addEventListener('popstate', function(event) {
-    setState(event.state, true);
   });
 
   if (window.opener) {

@@ -14,6 +14,13 @@ html.embed body {
     flex-direction: column
 }
 
+.embed-header,
+.embed-footer {
+    background: #eee;
+    padding: 1em;
+    text-align: right;
+}
+
 .embed-main {
     position: relative;
     flex: 1;
@@ -25,13 +32,20 @@ html.embed body {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
+    right: 0;
     width: 100%;
     overflow: auto;
-    transition: 0.5s left;
+    transition: 0.5s right;
     background: white;
+
+    padding: 1em;
+    box-sizing: border-box;
 }
 .embed-page.is-hidden,
 .embed-modal.is-hidden {
-    left: 100%;
+    right: -100%;
+}
+.embed-modal {
+    width: 95%;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.25);
 }

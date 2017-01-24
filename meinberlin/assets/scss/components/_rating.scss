@@ -15,12 +15,6 @@
     cursor: pointer;
     font-weight: normal;
 
-    &.is-read-only {
-        cursor: default;
-        background: none;
-        border: 0;
-    }
-
     &:first-child {
         margin-right: 0.2em;
     }
@@ -44,6 +38,9 @@
 
     &.is-read-only {
         color: $color;
+        cursor: default;
+        background: none;
+        border: 0;
     }
 }
 

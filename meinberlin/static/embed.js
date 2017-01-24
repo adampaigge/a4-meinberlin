@@ -16,6 +16,21 @@ $(document).ready(function() {
     });
   };
 
+  var setHidden = function($element, hidden) {
+    // see https://www.paciellogroup.com/blog/2012/05/html5-accessibility-chops-hidden-and-aria-hidden/
+    if (hidden) {
+      $element.addClass('is-hidden');
+      setTimeout(function() {
+        $element.attr('hidden', true)
+        $element.hide();
+      }, 500);  // transition takes 0.5s
+    } else {
+      $element.attr('hidden', null);
+      $element.show();
+      $element.removeClass('is-hidden');
+    }
+  };
+
   var setState = function(newState, ignoreHistory) {
     var promises = [];
 
@@ -32,13 +47,7 @@ $(document).ready(function() {
       if (!ignoreHistory) {
         history.pushState(newState, '');
       }
-      if (state.modal) {
-        $modal.removeClass('is-hidden');
-        $modal.attr('aria-hidden', false);
-      } else {
-        $modal.addClass('is-hidden');
-        $modal.attr('aria-hidden', true);
-      }
+      setHidden($modal, !state.modal);
     });
   }
 

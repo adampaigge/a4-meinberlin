@@ -57,10 +57,10 @@ INSTALLED_APPS = (
     'adhocracy4.ratings.apps.RatingsConfig',
     'adhocracy4.comments.apps.CommentConfig',
 
+    'apps.ideas.apps.Config',
     'apps.cms.apps.Config',
     'apps.users.apps.Config',
     'apps.projects.apps.Config',
-    'apps.ideas.apps.Config',
 )
 
 MIDDLEWARE_CLASSES = (

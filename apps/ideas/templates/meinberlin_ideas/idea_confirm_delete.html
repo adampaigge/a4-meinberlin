@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n embed %}
 
 {% block title %}{% trans 'Confirm Idea Deletion' %}{% endblock %}
 {% block content %}
@@ -10,5 +10,5 @@
     {% csrf_token %}
     <input type="submit" value="{% trans 'Yes'%}" />
 </form>
-<a href="{% url 'idea-detail' idea.slug %}" class="cancel-button">{% trans 'Cancel'%}</a>
+<a href="{% embed_url 'idea-detail' idea.slug %}" class="cancel-button">{% trans 'Cancel'%}</a>
 {% endblock %}

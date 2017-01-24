@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n embed %}
 
 {% block title %}Edit {{idea.name}}{% endblock %}
 {% block content %}
 <nav class="breadcrumbs">
     <ul>
         <li>
-            <a href="{% url 'project-detail' idea.project.slug %}">
+            <a href="{% embed_url 'project-detail' idea.project.slug %}">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 {% trans 'back to project' %}</a>
         </li>
         <li>
-            <a href="{% url 'idea-detail' idea.slug %}">
+            <a href="{% embed_url 'idea-detail' idea.slug %}">
                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 {% trans 'back to idea' %}</a>
         </li>

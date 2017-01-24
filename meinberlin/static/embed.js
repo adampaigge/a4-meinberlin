@@ -33,9 +33,11 @@ $(document).ready(function() {
         history.pushState(newState, '');
       }
       if (state.modal) {
-        $modal.show();
+        $modal.removeClass('is-hidden');
+        $modal.attr('aria-hidden', false);
       } else {
-        $modal.hide();
+        $modal.addClass('is-hidden');
+        $modal.attr('aria-hidden', true);
       }
     });
   }

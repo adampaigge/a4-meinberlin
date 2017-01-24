@@ -17,6 +17,7 @@ html.embed body {
 .embed-main {
     position: relative;
     flex: 1;
+    overflow: hidden;
 }
 
 .embed-page,
@@ -25,12 +26,12 @@ html.embed body {
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    width: 100%;
     overflow: auto;
+    transition: 0.5s left;
+    background: white;
 }
-.embed-page {
-    right: 50%;
-}
-.embed-modal {
-    left: 50%;
+.embed-page.is-hidden,
+.embed-modal.is-hidden {
+    left: 100%;
 }

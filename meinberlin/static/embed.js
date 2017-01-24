@@ -20,6 +20,12 @@ $(document).ready(function() {
         }), $target);
       });
     });
+
+    $target.find('.messages > *').each(function(index, el) {
+      setTimeout(function() {
+        $(el).remove();
+      }, 10000);
+    });
   };
 
   var loadHtml = function(promise, $target) {

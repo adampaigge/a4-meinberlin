@@ -26,7 +26,8 @@ module.exports = function($wrapper) {
           .attr('id', id)
           .attr('aria-haspopup', 'true')
           .attr('aria-expanded', 'false')
-          .click(function() {
+          .click(function(event) {
+              event.preventDefault();
               setShow(!$el.hasClass('is-show'));
           });
 

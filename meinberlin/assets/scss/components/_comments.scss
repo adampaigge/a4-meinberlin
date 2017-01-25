@@ -1,0 +1,56 @@
+.black-divider {
+    padding: 1em;
+    margin-bottom: $spacer;
+    color: $text-color-inverted;
+    background-color: $text-color;
+}
+
+.comment-box {
+    textarea {
+        width: 100%;
+    }
+
+    .nav {
+        margin: 0;
+        padding: 0;
+
+        > li {
+            display: inline-block;
+        }
+    }
+
+    .navbar {
+        @include pie-clearfix;
+    }
+
+    .navbar-nav {
+        float: left;
+    }
+}
+
+.modal {
+    display: none;
+}
+
+.comment-author {
+    display: inline;
+}
+
+.comment {
+    margin-bottom: $spacer;
+}
+
+.label {
+    font-size: 80%;
+    background: $brand-secondary;
+    color: $text-color-inverted;
+    font-weight: normal;
+    line-height: 1.4;
+    border-radius: 0.7em;
+    padding: 0 0.7em
+}
+
+.comment-child-list {
+    margin-left: 1em;
+    margin-top: $spacer;
+}

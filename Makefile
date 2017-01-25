@@ -13,6 +13,9 @@ install:
 webpack: $(SCSS_FILES) $(JS_FILES)
 	$(NODE_BIN)/webpack
 
+webpack-watch:
+	$(NODE_BIN)/webpack --watch
+
 makemessages:
 	$(VIRTUAL_ENV)/bin/python manage.py makemessages
 

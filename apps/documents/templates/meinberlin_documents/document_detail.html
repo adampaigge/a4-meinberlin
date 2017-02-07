@@ -1,5 +1,5 @@
 {% extends 'meinberlin_projects/project_detail.html' %}
-{% load i18n react_comments %}
+{% load i18n react_comments react_paragraphs %}
 
 {% block phase_content %}
 <div class="document">
@@ -31,6 +31,8 @@
     </article>
 
     {% react_comments object %}
+
+    {% react_paragraphs object object.module %}
 
 </div>
 {% endblock %}

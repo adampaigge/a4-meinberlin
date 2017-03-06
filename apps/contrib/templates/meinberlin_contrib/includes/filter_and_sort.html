@@ -1,5 +1,39 @@
-{% load i18n %}
-<form action="" method="get">
-    {{ filter.form }}
-    <input type="submit" />
+{% load contrib_tags i18n %}
+
+<form method="GET">
+    {% for field in filter.form %}
+        {% if field.name != 'ordering' %}
+            <select name="{{ field.name }}" title="{{ field.label }}" onchange="this.form.submit()">
+                {% for value, label in field.field.choices %}
+                    <option value="{{ value }}"{% ifequal value|stringformat:"s" field.data %} selected{% endifequal %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
+    {% endfor %}
+    {% if filter.form.ordering.data %}
+        <input type="hidden" name="ordering" value="{{ filter.form.ordering.dat }}" />
+    {% endif %}
 </form>
+
+<div class="dropdown dropdown--right">
+    {% trans 'Sort by:' %}
+    <button
+            type="button"
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            id="sorts"
+    >
+        {{ view.get_ordering_name }}
+        <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="sorts">
+        {% for name, label in filter.form.ordering.field.choices %}
+        <li>
+            {% combinedUrlParameter request.GET page=1 ordering=name as url_par %}
+            <a class="dropdown-item" href="{{url_par}}">{{ label }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

@@ -1,7 +1,5 @@
-from django import forms
-
 from adhocracy4.categories import forms as category_forms
-
+from adhocracy4.modules import forms as module_forms
 from . import models
 
 
@@ -12,10 +10,9 @@ class ProposalForm(category_forms.CategorizableForm):
         fields = ['name', 'description', 'category', 'budget']
 
 
-class ProposalModerateForm(forms.ModelForm):
+class ProposalModerateForm(module_forms.ItemForm):
 
     def __init__(self, *args, **kwargs):
-        kwargs.pop('module')
         super(ProposalModerateForm, self).__init__(*args, **kwargs)
 
     class Meta:

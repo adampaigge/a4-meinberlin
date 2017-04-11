@@ -9,10 +9,9 @@ from . import models
 class MapIdeaForm(category_forms.CategorizableForm):
 
     def __init__(self, *args, **kwargs):
-        self.settings = kwargs.pop('settings_instance')
         super().__init__(*args, **kwargs)
         self.fields['point'].widget = maps_widgets.MapChoosePointWidget(
-            polygon=self.settings.polygon)
+            polygon=self.settings_instance.polygon)
         self.fields['point'].error_messages['required'] = _(
             'Please locate your proposal on the map.')
 

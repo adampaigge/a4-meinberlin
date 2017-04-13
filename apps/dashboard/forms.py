@@ -7,14 +7,23 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ngettext
 
 from adhocracy4.categories import models as category_models
+from adhocracy4.maps.models import AreaSettings
 from adhocracy4.modules import models as module_models
 from adhocracy4.phases import models as phase_models
 from adhocracy4.projects import models as project_models
 from apps.contrib import multiform
 from apps.contrib.formset import dynamic_modelformset_factory
+from apps.mapideas.widgets import MapChoosePolygonPresetsWidget
 from apps.organisations.models import Organisation
 from apps.users.fields import CommaSeparatedEmailField
 from apps.users.models import User
+
+
+SettingsForms = {
+    AreaSettings: {
+        'polygon': MapChoosePolygonPresetsWidget
+    }
+}
 
 
 def get_module_settings_form(settings_instance_or_modelref):
@@ -26,12 +35,15 @@ def get_module_settings_form(settings_instance_or_modelref):
             settings_instance_or_modelref[1],
         )
 
+    setting_widgets = SettingsForms.get(settings_model,
+                                        settings_model.widgets())
+
     class ModuleSettings(forms.ModelForm):
 
         class Meta:
             model = settings_model
             exclude = ['module']
-            widgets = settings_model().widgets()
+            widgets = setting_widgets
 
     return ModuleSettings
 

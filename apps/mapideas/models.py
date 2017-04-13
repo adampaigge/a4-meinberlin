@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from adhocracy4.maps import fields as map_fields
@@ -20,3 +21,8 @@ class MapIdea(AbstractMapIdea):
 
     def get_absolute_url(self):
         return reverse('mapideas:idea-detail', args=[str(self.slug)])
+
+
+class MapPreset(models.Model):
+    name = models.CharField(max_length=64)
+    preset = map_fields.MultiPolygonField()

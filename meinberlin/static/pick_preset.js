@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 $('[data-map="choose_polygon"]').each(function (i, e) {
-  name = e.getAttribute('data-name')
+  var name = e.getAttribute('data-name')
 
   $('#select_' + name).on('change', function (event) {
     var geoJson = event.target.value

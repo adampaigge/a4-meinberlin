@@ -1,0 +1,9 @@
+{% if presets %}
+    <select id="select_{{ name }}">
+        <option value="">Choose Area</option>
+        {% for preset in presets %}
+            <option value="{{ preset.preset }}">{{ preset.name }}</option>
+        {% endfor %}
+    </select>
+{% endif %}
+{{ map }}

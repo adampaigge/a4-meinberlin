@@ -6,3 +6,4 @@ from . import models
 
 
 admin.site.register(models.MapIdea, module_admin.ItemAdmin)
+admin.site.register(models.MapPreset, admin.ModelAdmin)

@@ -2,6 +2,7 @@ var api = require('adhocracy4').api
 var React = require('react')
 var django = require('django')
 var Alert = require('../../contrib/static/js/Alert')
+var CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup')
 
 var Question = React.createClass({
   getInitialState: function () {
@@ -168,40 +169,42 @@ var Question = React.createClass({
         <h2>{ this.props.question.label }</h2>
 
         <div className="poll__rows">
-          {
-            this.props.question.choices.map((choice, i) => {
-              let checked = this.state.selectedChoice === i
-              let chosen = this.state.ownChoice === i
-              let count = this.state.counts[i]
-              let percent = total === 0 ? 0 : Math.round(count / total * 100)
-              let highlight = count === max && max > 0
+          <CSSTransitionGroup transitionName="example">
+            {
+              this.props.question.choices.map((choice, i) => {
+                let checked = this.state.selectedChoice === i
+                let chosen = this.state.ownChoice === i
+                let count = this.state.counts[i]
+                let percent = total === 0 ? 0 : Math.round(count / total * 100)
+                let highlight = count === max && max > 0
 
-              if (this.state.showResult || !this.state.active) {
-                return (
-                  <div className="poll-row" key={i}>
-                    <div className="poll-row__number">{ percent }%</div>
-                    <div className="poll-row__label">{ choice.label }</div>
-                    { chosen ? <i className="fa fa-check-circle u-secondary" aria-label={django.gettext('Your choice')} /> : '' }
-                    <div className={'poll-row__bar' + (highlight ? ' poll-row__bar--highlight' : '')} style={{width: percent + '%'}} />
-                  </div>
-                )
-              } else {
-                return (
-                  <label className="poll-row radio" key={i}>
-                    <input
-                      className="poll-row__radio radio__input"
-                      type="radio"
-                      name="question"
-                      value={i}
-                      checked={checked}
-                      onChange={this.handleOnChange}
-                    />
-                    <span className="radio__text">{ choice.label }</span>
-                  </label>
-                )
-              }
-            })
-          }
+                if (this.state.showResult || !this.state.active) {
+                  return (
+                    <div className="poll-row" key={i}>
+                      <div className="poll-row__number">{ percent }%</div>
+                      <div className="poll-row__label">{ choice.label }</div>
+                      { chosen ? <i className="fa fa-check-circle u-secondary" aria-label={django.gettext('Your choice')} /> : '' }
+                      <div className={'poll-row__bar' + (highlight ? ' poll-row__bar--highlight' : '')} style={{width: percent + '%'}} />
+                    </div>
+                  )
+                } else {
+                  return (
+                    <label className="poll-row radio" key={i}>
+                      <input
+                        className="poll-row__radio radio__input"
+                        type="radio"
+                        name="question"
+                        value={i}
+                        checked={checked}
+                        onChange={this.handleOnChange}
+                      />
+                      <span className="radio__text">{ choice.label }</span>
+                    </label>
+                  )
+                }
+              })
+            }
+          </CSSTransitionGroup>
         </div>
 
         <Alert onClick={this.removeAlert} {...this.state.alert} />
